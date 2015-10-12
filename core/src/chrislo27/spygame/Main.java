@@ -49,7 +49,6 @@ public class Main extends ionium.templates.Main {
 
 		ScreenRegistry reg = ScreenRegistry.instance();
 
-		
 	}
 
 	@Override
