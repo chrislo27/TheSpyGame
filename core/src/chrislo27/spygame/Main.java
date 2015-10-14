@@ -3,6 +3,7 @@ package chrislo27.spygame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Array;
+import com.sun.java.accessibility.util.Translator;
 
 import chrislo27.spygame.load.AssetLoader;
 import chrislo27.spygame.load.ConstTweaks;
@@ -10,8 +11,7 @@ import ionium.registry.AssetRegistry;
 import ionium.registry.ScreenRegistry;
 import ionium.util.DebugSetting;
 import ionium.util.Logger;
-import ionium.util.Translator;
-import ionium.util.controllers.Xbox360Controllers;
+import ionium.util.i18n.Localization;
 
 public class Main extends ionium.templates.Main {
 
@@ -81,7 +81,7 @@ public class Main extends ionium.templates.Main {
 
 		if (Gdx.input.isKeyPressed(DebugSetting.DEBUG_KEY)) {
 			if (Gdx.input.isKeyPressed(Keys.I) && Gdx.input.isKeyJustPressed(Keys.N)) {
-				Translator.instance().reloadFromFile();
+				Localization.instance().reloadFromFile();
 				Main.logger.debug("Reloaded I18N from files");
 			}
 		}
