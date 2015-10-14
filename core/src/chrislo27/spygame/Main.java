@@ -92,8 +92,6 @@ public class Main extends ionium.templates.Main {
 	@Override
 	public void loadFont() {
 		super.loadFont();
-
-		
 	}
 
 	@Override
