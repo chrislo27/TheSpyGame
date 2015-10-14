@@ -30,7 +30,6 @@ public class Main extends ionium.templates.Main {
 
 		ConstTweaks.tweakConstants();
 		resizeScreenFromSettings();
-		Xbox360Controllers.instance().findControllers();
 
 		AssetRegistry.instance().addAssetLoader(new AssetLoader());
 	}
