@@ -2,8 +2,11 @@ package chrislo27.spygame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.utils.Array;
-import com.sun.java.accessibility.util.Translator;
 
 import chrislo27.spygame.load.AssetLoader;
 import chrislo27.spygame.load.ConstTweaks;
@@ -15,6 +18,8 @@ import ionium.util.i18n.Localization;
 
 public class Main extends ionium.templates.Main {
 
+	public BitmapFont font;
+	
 	public Main(Logger l) {
 		super(l);
 	}
@@ -91,6 +96,18 @@ public class Main extends ionium.templates.Main {
 	@Override
 	public void loadFont() {
 		super.loadFont();
+		
+		FreeTypeFontGenerator ttfGenerator = new FreeTypeFontGenerator(
+				Gdx.files.internal("fonts/courbd.ttf"));
+		FreeTypeFontParameter ttfParam = new FreeTypeFontParameter();
+		ttfParam.magFilter = TextureFilter.Nearest;
+		ttfParam.minFilter = TextureFilter.Nearest;
+		ttfParam.genMipMaps = true;
+		ttfParam.size = 24;
+		font = ttfGenerator.generateFont(ttfParam);
+		font.getData().markupEnabled = true;
+
+		ttfGenerator.dispose();
 	}
 
 	@Override
