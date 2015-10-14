@@ -4,6 +4,7 @@ import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import chrislo27.spygame.Main;
+import ionium.desktop.GameLwjglApp;
 import ionium.registry.GlobalVariables;
 import ionium.util.Logger;
 
@@ -27,7 +28,7 @@ public class DesktopLauncher {
 		config.addIcon("images/icon/icon128.png", FileType.Internal);
 
 		logger = new Logger("", com.badlogic.gdx.utils.Logger.DEBUG);
-		// new GameLwjglApp(new Main(logger), config, logger);
+		new GameLwjglApp(new Main(logger), config, logger);
 	}
 
 }
