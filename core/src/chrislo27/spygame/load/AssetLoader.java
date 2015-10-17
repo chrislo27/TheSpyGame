@@ -13,7 +13,10 @@ public class AssetLoader implements IAssetLoader {
 
 	@Override
 	public void addManagedAssets(AssetManager manager) {
-		
+		manager.load(AssetMap.add("flag_unknown", "images/flags/unknown.png"), Texture.class);
+		manager.load(AssetMap.add("flag_canada", "images/flags/canada.png"), Texture.class);
+		manager.load(AssetMap.add("flag_usa", "images/flags/usa.png"), Texture.class);
+		manager.load(AssetMap.add("flag_gb", "images/flags/gb.png"), Texture.class);
 	}
 
 	@Override
