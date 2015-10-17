@@ -10,7 +10,9 @@ import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.load.AssetLoader;
 import chrislo27.spygame.load.GlobalVariableTweaks;
+import chrislo27.spygame.screen.LanguageScreen;
 import chrislo27.spygame.screen.MainMenuScreen;
+import chrislo27.spygame.screen.SettingsScreen;
 import ionium.registry.AssetRegistry;
 import ionium.registry.ScreenRegistry;
 import ionium.util.DebugSetting;
@@ -57,6 +59,8 @@ public class Main extends ionium.templates.Main {
 		ScreenRegistry reg = ScreenRegistry.instance();
 
 		reg.add("mainMenu", new MainMenuScreen(this));
+		reg.add("settings", new SettingsScreen(this));
+		reg.add("langSelect", new LanguageScreen(this));
 	}
 
 	@Override
