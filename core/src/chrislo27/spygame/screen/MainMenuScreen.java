@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import chrislo27.spygame.Main;
 import chrislo27.spygame.Settings;
 import ionium.registry.GlobalVariables;
+import ionium.registry.ScreenRegistry;
 import ionium.ui.BackButton;
 import ionium.ui.SettingsButton;
 
@@ -20,7 +21,7 @@ public class MainMenuScreen extends ScreenBase {
 			public boolean onLeftClick() {
 				Gdx.app.exit();
 				
-				return false;
+				return true;
 			}
 			
 			@Override
@@ -34,7 +35,14 @@ public class MainMenuScreen extends ScreenBase {
 			}
 
 		}.useExitTexture());
-		container.elements.add(new SettingsButton(0, 0, 64, 64));
+		container.elements.add(new SettingsButton(0, 0, 64, 64){
+			@Override
+			public boolean onLeftClick() {
+				main.setScreen(ScreenRegistry.get("settings"));
+				
+				return true;
+			}
+		});
 	}
 
 	@Override
