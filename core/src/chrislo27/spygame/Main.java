@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.load.AssetLoader;
 import chrislo27.spygame.load.GlobalVariableTweaks;
+import chrislo27.spygame.screen.MainMenuScreen;
 import ionium.registry.AssetRegistry;
 import ionium.registry.ScreenRegistry;
 import ionium.util.DebugSetting;
@@ -19,31 +20,33 @@ import ionium.util.i18n.Localization;
 public class Main extends ionium.templates.Main {
 
 	public BitmapFont font;
-	
+
 	public Main(Logger l) {
 		super(l);
 	}
 
 	@Override
 	public String getScreenToSwitchToAfterLoadingAssets() {
-		return "mainmenu";
+		return "mainMenu";
 	}
-	
+
 	@Override
 	public void create() {
 		super.create();
 
 		GlobalVariableTweaks.tweak();
-		resizeScreenFromSettings();
 
 		AssetRegistry.instance().addAssetLoader(new AssetLoader());
+
+		resizeScreenFromSettings();
 	}
 
 	private void resizeScreenFromSettings() {
 		if (Gdx.graphics.getWidth() != Settings.instance().actualWidth
 				|| Gdx.graphics.getHeight() != Settings.instance().actualHeight
 				|| Gdx.graphics.isFullscreen() != Settings.instance().fullscreen) {
-			Gdx.graphics.setDisplayMode(Settings.instance().actualWidth, Settings.instance().actualHeight, false);
+			Gdx.graphics.setDisplayMode(Settings.instance().actualWidth,
+					Settings.instance().actualHeight, Settings.instance().fullscreen);
 		}
 	}
 
@@ -53,6 +56,7 @@ public class Main extends ionium.templates.Main {
 
 		ScreenRegistry reg = ScreenRegistry.instance();
 
+		reg.add("mainMenu", new MainMenuScreen(this));
 	}
 
 	@Override
@@ -96,7 +100,7 @@ public class Main extends ionium.templates.Main {
 	@Override
 	public void loadFont() {
 		super.loadFont();
-		
+
 		FreeTypeFontGenerator ttfGenerator = new FreeTypeFontGenerator(
 				Gdx.files.internal("fonts/courbd.ttf"));
 		FreeTypeFontParameter ttfParam = new FreeTypeFontParameter();
@@ -116,5 +120,5 @@ public class Main extends ionium.templates.Main {
 
 		Settings.getPreferences().flush();
 	}
-	
+
 }
