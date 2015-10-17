@@ -3,9 +3,9 @@ package chrislo27.spygame.load;
 import ionium.registry.GlobalVariables;
 import ionium.util.DebugSetting;
 
-public class ConstTweaks {
+public class GlobalVariableTweaks {
 
-	public static final void tweakConstants(){
+	public static final void tweak(){
 		GlobalVariables.instance().putInt("TICKS", 30);
 		GlobalVariables
 				.instance()

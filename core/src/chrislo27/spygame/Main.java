@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.load.AssetLoader;
-import chrislo27.spygame.load.ConstTweaks;
+import chrislo27.spygame.load.GlobalVariableTweaks;
 import ionium.registry.AssetRegistry;
 import ionium.registry.ScreenRegistry;
 import ionium.util.DebugSetting;
@@ -33,7 +33,7 @@ public class Main extends ionium.templates.Main {
 	public void create() {
 		super.create();
 
-		ConstTweaks.tweakConstants();
+		GlobalVariableTweaks.tweak();
 		resizeScreenFromSettings();
 
 		AssetRegistry.instance().addAssetLoader(new AssetLoader());
