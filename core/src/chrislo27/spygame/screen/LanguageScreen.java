@@ -56,6 +56,8 @@ public class LanguageScreen extends ScreenBase {
 
 			allLanguages.add(new Flag(locale));
 		}
+		
+		Localization.instance().loadFromSettings(Settings.getPreferences());
 
 	}
 
