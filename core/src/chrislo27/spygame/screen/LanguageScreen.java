@@ -117,7 +117,7 @@ public class LanguageScreen extends ScreenBase {
 
 		main.batch.flush();
 
-		container.render(main);
+		container.render(main, main.font);
 
 		main.batch.end();
 	}

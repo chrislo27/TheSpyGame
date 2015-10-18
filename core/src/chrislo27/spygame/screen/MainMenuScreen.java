@@ -4,10 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.Main;
-import chrislo27.spygame.Settings;
-import ionium.registry.GlobalVariables;
 import ionium.registry.ScreenRegistry;
 import ionium.ui.BackButton;
+import ionium.ui.Button;
 import ionium.ui.SettingsButton;
 
 public class MainMenuScreen extends ScreenBase {
@@ -20,26 +19,37 @@ public class MainMenuScreen extends ScreenBase {
 			@Override
 			public boolean onLeftClick() {
 				Gdx.app.exit();
-				
+
 				return true;
 			}
-			
+
 			@Override
-			public BackButton updateActualSizeFromFixed(){
+			public BackButton updateActualSizeFromFixed() {
 				super.updateActualSizeFromFixed();
-				
+
 				x = 1f - width;
 				y = 1f - height;
-				
+
 				return this;
 			}
 
 		}.useExitTexture());
-		container.elements.add(new SettingsButton(0, 0, 64, 64){
+		container.elements.add(new SettingsButton(0, 0, 64, 64) {
+
 			@Override
 			public boolean onLeftClick() {
 				main.setScreen(ScreenRegistry.get("settings"));
-				
+
+				return true;
+			}
+		});
+
+		container.elements.add(new Button(0.4f, 0.2f, 0.2f, 0.05f, "menu.newgame") {
+
+			@Override
+			public boolean onLeftClick() {
+				main.setScreen(ScreenRegistry.get("settings"));
+
 				return true;
 			}
 		});
@@ -49,7 +59,7 @@ public class MainMenuScreen extends ScreenBase {
 	public void render(float delta) {
 		main.batch.begin();
 
-		container.render(main);
+		container.render(main, main.font);
 
 		main.batch.end();
 	}
