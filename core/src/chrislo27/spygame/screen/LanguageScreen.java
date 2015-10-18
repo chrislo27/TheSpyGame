@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.Main;
+import chrislo27.spygame.Settings;
 import ionium.registry.AssetRegistry;
 import ionium.registry.ScreenRegistry;
 import ionium.ui.BackButton;
@@ -108,6 +109,7 @@ public class LanguageScreen extends ScreenBase {
 					&& Main.convertY(Gdx.input.getY()) <= y + tex.getHeight()) {
 				if (Utils.isButtonJustPressed(Buttons.LEFT)) {
 					Localization.instance().setLanguage(locale);
+					Localization.instance().saveToSettings(Settings.getPreferences());
 				}
 			}
 
