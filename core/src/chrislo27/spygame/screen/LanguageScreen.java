@@ -26,7 +26,7 @@ public class LanguageScreen extends ScreenBase {
 
 			@Override
 			public boolean onLeftClick() {
-				main.setScreen(ScreenRegistry.get("mainMenu"));
+				main.setScreen(ScreenRegistry.get("settings"));
 
 				return true;
 			}
