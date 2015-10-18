@@ -55,8 +55,6 @@ public class LanguageScreen extends ScreenBase {
 			NamedLocale locale = Localization.instance().getAllBundles().get(i).getLocale();
 
 			allLanguages.add(new Flag(locale));
-
-			Main.logger.debug("noot");
 		}
 
 	}
