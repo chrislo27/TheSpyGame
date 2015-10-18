@@ -1,6 +1,7 @@
 package chrislo27.spygame.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
@@ -48,12 +49,12 @@ public class LanguageScreen extends ScreenBase {
 	public void addLanguageButtons() {
 
 		allLanguages.clear();
-		
+
 		for (int i = 0; i < Localization.instance().getAllBundles().size; i++) {
 			NamedLocale locale = Localization.instance().getAllBundles().get(i).getLocale();
 
 			allLanguages.add(new Flag(locale));
-			
+
 			Main.logger.debug("noot");
 		}
 
@@ -76,7 +77,7 @@ public class LanguageScreen extends ScreenBase {
 
 			final int spacingBetweenName = 16;
 			final int spacingBetweenFlags = tex.getHeight() + 16;
-			
+
 			float x = Gdx.graphics.getWidth() / 2f - (tex.getWidth()) - (spacingBetweenName / 2f);
 			float y = Main.convertY(256 + (spacingBetweenFlags * i));
 
@@ -95,8 +96,21 @@ public class LanguageScreen extends ScreenBase {
 			}
 
 			main.font.setColor(1, 1, 1, 1);
-			main.font.draw(main.batch, locale.getName(), x + (tex.getWidth()) + spacingBetweenName,
+			main.font
+					.draw(main.batch,
+							locale.getName() + (locale
+									.equals(Localization.instance().getCurrentBundle().getLocale())
+											? " <--" : ""),
+					x + (tex.getWidth()) + spacingBetweenName,
 					y + (tex.getHeight() / 2) + (Utils.getHeight(main.font, locale.getName()) / 2));
+
+			if (Main.convertY(Gdx.input.getY()) >= y
+					&& Main.convertY(Gdx.input.getY()) <= y + tex.getHeight()) {
+				if (Utils.isButtonJustPressed(Buttons.LEFT)) {
+					Localization.instance().setLanguage(locale);
+				}
+			}
+
 		}
 
 		main.batch.flush();
