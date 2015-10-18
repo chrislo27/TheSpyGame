@@ -175,7 +175,7 @@ public class LanguageScreen extends ScreenBase {
 		public void update(float speed) {
 			if (percentage >= 1) {
 				waiting = !waiting;
-				percentage = 0;
+				percentage -= 1;
 
 				if (waiting == true) {
 					scrollFlags();
