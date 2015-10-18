@@ -17,6 +17,8 @@ public class AssetLoader implements IAssetLoader {
 		manager.load(AssetMap.add("flag_canada", "images/flags/canada.png"), Texture.class);
 		manager.load(AssetMap.add("flag_usa", "images/flags/usa.png"), Texture.class);
 		manager.load(AssetMap.add("flag_gb", "images/flags/gb.png"), Texture.class);
+		manager.load(AssetMap.add("flag_france", "images/flags/france.png"), Texture.class);
+		manager.load(AssetMap.add("flag_quebec", "images/flags/quebec.png"), Texture.class);
 	}
 
 	@Override
