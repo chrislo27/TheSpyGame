@@ -48,8 +48,6 @@ public class MainMenuScreen extends ScreenBase {
 
 			@Override
 			public boolean onLeftClick() {
-				main.setScreen(ScreenRegistry.get("settings"));
-
 				return true;
 			}
 		});
