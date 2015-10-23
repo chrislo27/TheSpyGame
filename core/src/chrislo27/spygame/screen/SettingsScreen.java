@@ -42,8 +42,8 @@ public class SettingsScreen extends ScreenBase {
 			@Override
 			public void render(ionium.templates.Main main, BitmapFont font) {
 				imageRender(main, "guilanguage");
-				main.defaultFont.setColor(Color.WHITE);
-				main.defaultFont.draw(main.batch,
+				font.setColor(Color.WHITE);
+				font.draw(main.batch,
 						Localization.get("menu.currentLanguage") + ": "
 								+ Localization.instance().getCurrentBundle().getLocale().getName(),
 						(x + width) * Gdx.graphics.getWidth() + 5,

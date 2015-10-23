@@ -114,6 +114,7 @@ public class Main extends ionium.templates.Main {
 		ttfParam.minFilter = TextureFilter.Nearest;
 		ttfParam.genMipMaps = true;
 		ttfParam.size = 24;
+		Main.logger.debug(ttfParam.characters);
 		font = ttfGenerator.generateFont(ttfParam);
 		font.getData().markupEnabled = true;
 
