@@ -27,7 +27,7 @@ public abstract class Entity implements Boundable {
 		updatePositionFromVelocity(CollisionAxis.Y);
 	}
 
-	public void updatePositionFromVelocity(CollisionAxis axis) {
+	private void updatePositionFromVelocity(CollisionAxis axis) {
 		int transformedVelo = ((int) (((axis == CollisionAxis.X ? veloX : veloY)
 				/ GlobalVariables.getInt("TICKS")) * World.PX_UNIT));
 
