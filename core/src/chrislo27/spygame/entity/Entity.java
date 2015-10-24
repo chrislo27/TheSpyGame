@@ -23,43 +23,42 @@ public abstract class Entity implements Boundable {
 	}
 
 	public void tickUpdate() {
-		updatePositionFromVelocity();
+		updatePositionFromVelocity(CollisionAxis.X);
+		updatePositionFromVelocity(CollisionAxis.Y);
 	}
 
-	public void updatePositionFromVelocity() {
-		int transformedVeloX = ((int) ((veloX / GlobalVariables.getInt("TICKS")) * World.PX_UNIT));
-		int transformedVeloY = ((int) ((veloY / GlobalVariables.getInt("TICKS")) * World.PX_UNIT));
+	public void updatePositionFromVelocity(CollisionAxis axis) {
+		int transformedVelo = ((int) (((axis == CollisionAxis.X ? veloX : veloY)
+				/ GlobalVariables.getInt("TICKS")) * World.PX_UNIT));
 
-		if (transformedVeloX != 0) {
-			for (int i = 0; i < Math.abs(transformedVeloX); i++) {
-				Entity e = getEntityColliding(
-						(transformedVeloX > 0 ? Direction.RIGHT : Direction.LEFT));
+		if (transformedVelo != 0) {
+			for (int i = 0; i < Math.abs(transformedVelo); i++) {
+				Entity e = getEntityColliding(axis == CollisionAxis.X
+						? (transformedVelo > 0 ? Direction.RIGHT : Direction.LEFT)
+						: (transformedVelo > 0 ? Direction.UP : Direction.DOWN));
 
 				if (e != null) {
-					veloX = 0;
+					if(axis == CollisionAxis.X){
+						veloX = 0;
+					}else if(axis == CollisionAxis.Y){
+						veloY = 0;
+					}
 					break;
 				} else {
-					bounds.x += Math.signum(transformedVeloX) * World.UNIT_PX;
+					float amt = Math.signum(transformedVelo) * World.UNIT_PX;
+					if(axis == CollisionAxis.X){
+						veloX += amt;
+					}else if(axis == CollisionAxis.Y){
+						veloY += amt;
+					}
 				}
 			}
 		} else {
-			veloX = 0;
-		}
-
-		if (transformedVeloY != 0) {
-			for (int i = 0; i < Math.abs(transformedVeloY); i++) {
-				Entity e = getEntityColliding(
-						(transformedVeloY > 0 ? Direction.UP : Direction.DOWN));
-
-				if (e != null) {
-					veloY = 0;
-					break;
-				} else {
-					bounds.y += Math.signum(transformedVeloY) * World.UNIT_PX;
-				}
+			if(axis == CollisionAxis.X){
+				veloX = 0;
+			}else if(axis == CollisionAxis.Y){
+				veloY = 0;
 			}
-		} else {
-			veloY = 0;
 		}
 	}
 
@@ -114,6 +113,10 @@ public abstract class Entity implements Boundable {
 		}
 
 		return null;
+	}
+
+	private enum CollisionAxis {
+		X, Y;
 	}
 
 }
