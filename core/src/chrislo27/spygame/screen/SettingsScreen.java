@@ -9,6 +9,7 @@ import chrislo27.spygame.Main;
 import ionium.registry.ScreenRegistry;
 import ionium.ui.BackButton;
 import ionium.ui.Button;
+import ionium.util.Utils;
 import ionium.util.i18n.Localization;
 
 public class SettingsScreen extends ScreenBase {
@@ -42,12 +43,14 @@ public class SettingsScreen extends ScreenBase {
 			@Override
 			public void render(ionium.templates.Main main, BitmapFont font) {
 				imageRender(main, "guilanguage");
+
+				String text = Localization.get("menu.currentLanguage") + ": "
+						+ Localization.instance().getCurrentBundle().getLocale().getName();
+
 				font.setColor(Color.WHITE);
-				font.draw(main.batch,
-						Localization.get("menu.currentLanguage") + ": "
-								+ Localization.instance().getCurrentBundle().getLocale().getName(),
-						(x + width) * Gdx.graphics.getWidth() + 5,
-						(y + (height / 2)) * Gdx.graphics.getHeight());
+				font.draw(main.batch, text, (x + width) * Gdx.graphics.getWidth() + 5,
+						(y + (height / 2)) * Gdx.graphics.getHeight()
+								+ (Utils.getHeight(font, text) / 2f));
 			}
 
 			@Override
