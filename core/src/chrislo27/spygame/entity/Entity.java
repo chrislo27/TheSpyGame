@@ -31,34 +31,36 @@ public abstract class Entity implements Boundable {
 		int transformedVelo = ((int) (((axis == CollisionAxis.X ? veloX : veloY)
 				/ GlobalVariables.getInt("TICKS")) * World.PX_UNIT));
 
+		float newVelocity = (axis == CollisionAxis.X ? veloX : veloY);
+
 		if (transformedVelo != 0) {
+			Direction collisionDirection = axis == CollisionAxis.X
+					? (transformedVelo > 0 ? Direction.RIGHT : Direction.LEFT)
+					: (transformedVelo > 0 ? Direction.UP : Direction.DOWN);
+
 			for (int i = 0; i < Math.abs(transformedVelo); i++) {
-				Entity e = getEntityColliding(axis == CollisionAxis.X
-						? (transformedVelo > 0 ? Direction.RIGHT : Direction.LEFT)
-						: (transformedVelo > 0 ? Direction.UP : Direction.DOWN));
+				Entity e = getEntityColliding(collisionDirection);
 
 				if (e != null) {
-					if(axis == CollisionAxis.X){
-						veloX = 0;
-					}else if(axis == CollisionAxis.Y){
-						veloY = 0;
-					}
+					newVelocity = 0;
 					break;
 				} else {
 					float amt = Math.signum(transformedVelo) * World.UNIT_PX;
-					if(axis == CollisionAxis.X){
-						veloX += amt;
-					}else if(axis == CollisionAxis.Y){
-						veloY += amt;
+					if (axis == CollisionAxis.X) {
+						bounds.x += amt;
+					} else if (axis == CollisionAxis.Y) {
+						bounds.y += amt;
 					}
 				}
 			}
 		} else {
-			if(axis == CollisionAxis.X){
-				veloX = 0;
-			}else if(axis == CollisionAxis.Y){
-				veloY = 0;
-			}
+			newVelocity = 0;
+		}
+
+		if (axis == CollisionAxis.X) {
+			veloX = newVelocity;
+		} else if (axis == CollisionAxis.Y) {
+			veloY = newVelocity;
 		}
 	}
 
