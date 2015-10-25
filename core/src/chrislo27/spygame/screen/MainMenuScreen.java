@@ -44,14 +44,14 @@ public class MainMenuScreen extends ScreenBase {
 			}
 		});
 
-		container.elements.add(new Button(0.4f, 0.2f, 0.2f, 0.05f, "menu.newgame") {
+		container.elements.add(new Button(0.4f, 0.2f, 0.2f, 0.05f, "menu.play") {
 
 			@Override
 			public boolean onLeftClick() {
 				return true;
 			}
 		});
-	}
+}
 
 	@Override
 	public void render(float delta) {
