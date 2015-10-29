@@ -10,6 +10,8 @@ public class World {
 
 	public static final int PX_UNIT = 64;
 	public static final float UNIT_PX = (1f / PX_UNIT);
+	
+	public static final float FLOOR = 0f;
 
 	public Array<Entity> entities = new Array<>();
 

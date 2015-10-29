@@ -40,7 +40,7 @@ public abstract class Entity implements Boundable {
 
 			for (int i = 0; i < Math.abs(transformedVelo); i++) {
 				Entity e = getEntityColliding(collisionDirection);
-
+				
 				if (e != null) {
 					newVelocity = 0;
 					break;
@@ -72,6 +72,12 @@ public abstract class Entity implements Boundable {
 		int transformedY = ((int) bounds.y * World.PX_UNIT);
 		int transformedWidth = ((int) bounds.width * World.PX_UNIT);
 		int transformedHeight = ((int) bounds.height * World.PX_UNIT);
+		
+		if(direction == Direction.DOWN){
+			if(transformedY <= ((int) (World.FLOOR * World.PX_UNIT))){
+				return this;
+			}
+		}
 
 		for (int i = 0; i < world.entities.size; i++) {
 			e = world.entities.get(i);
