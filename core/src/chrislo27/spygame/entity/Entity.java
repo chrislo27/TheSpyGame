@@ -1,5 +1,6 @@
 package chrislo27.spygame.entity;
 
+import chrislo27.spygame.entity.render.EntityRenderer;
 import chrislo27.spygame.util.Bounds;
 import chrislo27.spygame.util.Bounds.Boundable;
 import chrislo27.spygame.world.World;
@@ -12,6 +13,8 @@ public abstract class Entity implements Boundable {
 	public float veloX = 0;
 	public float veloY = 0;
 	protected World world;
+	
+	protected EntityRenderer renderer;
 
 	public Entity(World world) {
 		this.world = world;
