@@ -33,10 +33,19 @@ public abstract class Entity implements Boundable {
 		return renderer;
 	}
 
+	/**
+	 * Returns true if the given entity is allowed to collide into this one.
+	 * @param e
+	 * @return
+	 */
 	public boolean canEntityCollideIntoMe(Entity e) {
 		return true;
 	}
 
+	/**
+	 * Returns true if
+	 * @return
+	 */
 	public boolean isStaticObject() {
 		return false;
 	}
@@ -151,7 +160,7 @@ public abstract class Entity implements Boundable {
 		return null;
 	}
 
-	private enum CollisionAxis {
+	public static enum CollisionAxis {
 		X, Y;
 	}
 
