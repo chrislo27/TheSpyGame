@@ -1,7 +1,5 @@
 package chrislo27.spygame.world;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.entity.Entity;
