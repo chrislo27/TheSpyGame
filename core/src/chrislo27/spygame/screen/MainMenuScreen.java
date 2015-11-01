@@ -51,7 +51,7 @@ public class MainMenuScreen extends ScreenBase {
 				return true;
 			}
 		});
-}
+	}
 
 	@Override
 	public void render(float delta) {
