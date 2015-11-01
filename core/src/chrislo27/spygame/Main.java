@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.utils.Array;
 
-import chrislo27.spygame.load.AssetLoader;
 import chrislo27.spygame.load.GlobalVariableTweaks;
 import chrislo27.spygame.load.LanguageAdder;
+import chrislo27.spygame.load.assetloaders.AssetLoader;
 import chrislo27.spygame.screen.LanguageScreen;
 import chrislo27.spygame.screen.MainMenuScreen;
 import chrislo27.spygame.screen.SettingsScreen;

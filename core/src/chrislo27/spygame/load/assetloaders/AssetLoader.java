@@ -1,4 +1,4 @@
-package chrislo27.spygame.load;
+package chrislo27.spygame.load.assetloaders;
 
 import java.util.HashMap;
 
