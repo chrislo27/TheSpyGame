@@ -1,7 +1,7 @@
 package chrislo27.spygame.entity;
 
-import chrislo27.spygame.Main;
 import chrislo27.spygame.entity.render.EntityRenderer;
+import chrislo27.spygame.util.BodyType;
 import chrislo27.spygame.util.Bounds;
 import chrislo27.spygame.util.Bounds.Boundable;
 import chrislo27.spygame.util.CollisionAxis;
@@ -43,16 +43,12 @@ public abstract class Entity implements Boundable {
 		return true;
 	}
 
-	/**
-	 * Returns true if
-	 * @return
-	 */
-	public boolean isStaticObject() {
-		return false;
+	public BodyType getBodyType() {
+		return BodyType.DYNAMIC;
 	}
 
 	public void tickUpdate() {
-		if (!isStaticObject()) {
+		if (getBodyType() == BodyType.DYNAMIC) {
 			updatePositionFromVelocity(CollisionAxis.X);
 			updatePositionFromVelocity(CollisionAxis.Y);
 		}
