@@ -11,16 +11,25 @@ import ionium.util.AssetMap;
 
 public class AssetLoader implements IAssetLoader {
 
-	@Override
-	public void addManagedAssets(AssetManager manager) {
+	private void loadFlags(AssetManager manager){
 		manager.load(AssetMap.add("flag_unknown", "images/flags/unknown.png"), Texture.class);
 		manager.load(AssetMap.add("flag_canada", "images/flags/canada.png"), Texture.class);
 		manager.load(AssetMap.add("flag_usa", "images/flags/usa.png"), Texture.class);
 		manager.load(AssetMap.add("flag_gb", "images/flags/gb.png"), Texture.class);
 		manager.load(AssetMap.add("flag_france", "images/flags/france.png"), Texture.class);
 		manager.load(AssetMap.add("flag_quebec", "images/flags/quebec.png"), Texture.class);
-		
+	}
+	
+	private void loadDebugThings(AssetManager manager){
 		manager.load(AssetMap.add("player_test", "images/entity/player.png"), Texture.class);
+		manager.load(AssetMap.add("starrysky", "images/starrysky.png"), Texture.class);
+	}
+	
+	@Override
+	public void addManagedAssets(AssetManager manager) {
+		loadFlags(manager);
+		
+		loadDebugThings(manager);
 	}
 
 	@Override
