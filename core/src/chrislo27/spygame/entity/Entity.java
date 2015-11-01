@@ -1,5 +1,6 @@
 package chrislo27.spygame.entity;
 
+import chrislo27.spygame.Main;
 import chrislo27.spygame.entity.render.EntityRenderer;
 import chrislo27.spygame.util.Bounds;
 import chrislo27.spygame.util.Bounds.Boundable;
@@ -13,12 +14,12 @@ public abstract class Entity implements Boundable {
 	public float veloX = 0;
 	public float veloY = 0;
 	protected World world;
-	
+
 	protected EntityRenderer renderer;
 
 	public Entity(World world, float x, float y) {
 		this.world = world;
-		
+
 		bounds.x = x;
 		bounds.y = y;
 	}
@@ -27,32 +28,50 @@ public abstract class Entity implements Boundable {
 	public Bounds getBounds() {
 		return bounds;
 	}
-	
-	public EntityRenderer getRenderer(){
+
+	public EntityRenderer getRenderer() {
 		return renderer;
 	}
 
+	public boolean canEntityCollideIntoMe(Entity e) {
+		return true;
+	}
+
+	public boolean isStaticObject() {
+		return false;
+	}
+
 	public void tickUpdate() {
-		updatePositionFromVelocity(CollisionAxis.X);
-		updatePositionFromVelocity(CollisionAxis.Y);
+		if (!isStaticObject()) {
+			updatePositionFromVelocity(CollisionAxis.X);
+			updatePositionFromVelocity(CollisionAxis.Y);
+		}
+		
+		veloY -= 2f;
 	}
 
 	private void updatePositionFromVelocity(CollisionAxis axis) {
-		int transformedVelo = ((int) (((axis == CollisionAxis.X ? veloX : veloY)
-				/ GlobalVariables.getInt("TICKS")) * World.PX_UNIT));
-
-		float newVelocity = (axis == CollisionAxis.X ? veloX : veloY);
+		float oldVelocity = (axis == CollisionAxis.X ? veloX : veloY);
+		float newVelocity = oldVelocity;
+		int transformedVelo = (int) ((oldVelocity / GlobalVariables.getInt("TICKS"))
+				* World.PX_UNIT);
 
 		if (transformedVelo != 0) {
-			Direction collisionDirection = axis == CollisionAxis.X
+			Direction collisionDirection = (axis == CollisionAxis.X
 					? (transformedVelo > 0 ? Direction.RIGHT : Direction.LEFT)
-					: (transformedVelo > 0 ? Direction.UP : Direction.DOWN);
+					: (transformedVelo > 0 ? Direction.UP : Direction.DOWN));
 
 			for (int i = 0; i < Math.abs(transformedVelo); i++) {
 				Entity e = getEntityColliding(collisionDirection);
-				
+
 				if (e != null) {
 					newVelocity = 0;
+					
+					if(e == this && e.bounds.y < 0){
+						// hit floor, colliding with yourself
+						e.bounds.y = 0;
+					}
+					
 					break;
 				} else {
 					float amt = Math.signum(transformedVelo) * World.UNIT_PX;
@@ -75,16 +94,14 @@ public abstract class Entity implements Boundable {
 	}
 
 	public Entity getEntityColliding(Direction direction) {
-		if (world.entities.size <= 1) return null;
-
 		Entity e;
-		int transformedX = ((int) bounds.x * World.PX_UNIT);
-		int transformedY = ((int) bounds.y * World.PX_UNIT);
-		int transformedWidth = ((int) bounds.width * World.PX_UNIT);
-		int transformedHeight = ((int) bounds.height * World.PX_UNIT);
-		
-		if(direction == Direction.DOWN){
-			if(transformedY <= ((int) (World.FLOOR * World.PX_UNIT))){
+		int transformedX = (int) (bounds.x * World.PX_UNIT);
+		int transformedY = (int) (bounds.y * World.PX_UNIT);
+		int transformedWidth = (int) (bounds.width * World.PX_UNIT);
+		int transformedHeight = (int) (bounds.height * World.PX_UNIT);
+
+		if (direction == Direction.DOWN) {
+			if (transformedY <= ((int) (World.FLOOR * World.PX_UNIT))) {
 				return this;
 			}
 		}
@@ -93,6 +110,7 @@ public abstract class Entity implements Boundable {
 			e = world.entities.get(i);
 
 			if (e == this) continue;
+			if (!e.canEntityCollideIntoMe(this)) continue;
 
 			int eX = ((int) e.bounds.x * World.PX_UNIT);
 			int eY = ((int) e.bounds.y * World.PX_UNIT);
