@@ -32,4 +32,8 @@ public class World {
 		
 	}
 	
+	public void renderUpdate(){
+		
+	}
+	
 }
