@@ -16,8 +16,11 @@ public abstract class Entity implements Boundable {
 	
 	protected EntityRenderer renderer;
 
-	public Entity(World world) {
+	public Entity(World world, float x, float y) {
 		this.world = world;
+		
+		bounds.x = x;
+		bounds.y = y;
 	}
 
 	@Override
