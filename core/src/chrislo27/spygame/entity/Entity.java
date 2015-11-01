@@ -4,6 +4,7 @@ import chrislo27.spygame.Main;
 import chrislo27.spygame.entity.render.EntityRenderer;
 import chrislo27.spygame.util.Bounds;
 import chrislo27.spygame.util.Bounds.Boundable;
+import chrislo27.spygame.util.CollisionAxis;
 import chrislo27.spygame.world.World;
 import ionium.registry.GlobalVariables;
 import ionium.util.Direction;
@@ -158,10 +159,6 @@ public abstract class Entity implements Boundable {
 		}
 
 		return null;
-	}
-
-	public static enum CollisionAxis {
-		X, Y;
 	}
 
 }
