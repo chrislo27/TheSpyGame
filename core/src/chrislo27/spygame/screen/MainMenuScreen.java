@@ -48,6 +48,7 @@ public class MainMenuScreen extends ScreenBase {
 
 			@Override
 			public boolean onLeftClick() {
+				main.setScreen(ScreenRegistry.get("testGame"));
 				return true;
 			}
 		});

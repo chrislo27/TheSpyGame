@@ -14,6 +14,7 @@ import chrislo27.spygame.load.assetloaders.AssetLoader;
 import chrislo27.spygame.screen.LanguageScreen;
 import chrislo27.spygame.screen.MainMenuScreen;
 import chrislo27.spygame.screen.SettingsScreen;
+import chrislo27.spygame.tests.TestGameScreen;
 import ionium.registry.AssetRegistry;
 import ionium.registry.ScreenRegistry;
 import ionium.util.DebugSetting;
@@ -63,6 +64,7 @@ public class Main extends ionium.templates.Main {
 		reg.add("mainMenu", new MainMenuScreen(this));
 		reg.add("settings", new SettingsScreen(this));
 		reg.add("langSelect", new LanguageScreen(this));
+		reg.add("testGame", new TestGameScreen(this));
 	}
 
 	@Override
