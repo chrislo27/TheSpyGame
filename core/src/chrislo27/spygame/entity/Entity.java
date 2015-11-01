@@ -24,6 +24,10 @@ public abstract class Entity implements Boundable {
 	public Bounds getBounds() {
 		return bounds;
 	}
+	
+	public EntityRenderer getRenderer(){
+		return renderer;
+	}
 
 	public void tickUpdate() {
 		updatePositionFromVelocity(CollisionAxis.X);
