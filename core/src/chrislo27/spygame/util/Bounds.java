@@ -3,7 +3,9 @@ package chrislo27.spygame.util;
 
 public class Bounds {
 
-	public float x, y, width, height;
+	public float x = 0;
+	public float y = 0;
+	public float width = 1, height = 1;
 	
 	public Bounds(){
 		
