@@ -1,6 +1,7 @@
 package chrislo27.spygame.world.render;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -28,26 +29,46 @@ public class WorldRenderer {
 				GlobalVariables.getInt("DEFAULT_HEIGHT") * 1f / World.PX_UNIT);
 		camera.update();
 	}
-	
-	public void render(){
+
+	public void render() {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		
-		batch.draw(AssetRegistry.getTexture("starrysky"), 0, 0, camera.viewportWidth, camera.viewportHeight);
-		
+
+		batch.draw(AssetRegistry.getTexture("starrysky"), 0, 0, camera.viewportWidth,
+				camera.viewportHeight);
+
 		batch.flush();
-		
-		for(int i = 0; i < world.entities.size; i++){
+
+		for (int i = 0; i < world.entities.size; i++) {
 			Entity e = world.entities.get(i);
-			
+
 			e.getRenderer().render(this);
 		}
-		
+
 		batch.end();
 		batch.setProjectionMatrix(main.camera.combined);
+
+		if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+			camera.translate(4f * Gdx.graphics.getDeltaTime(), 0);
+		} else if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+			camera.translate(-4f * Gdx.graphics.getDeltaTime(), 0);
+		}
+		if (Gdx.input.isKeyPressed(Keys.UP)) {
+			camera.translate(0, 4f * Gdx.graphics.getDeltaTime());
+		} else if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+			camera.translate(0, -4f * Gdx.graphics.getDeltaTime());
+		}
+
+		if (Gdx.input.isKeyPressed(Keys.Z)) {
+			camera.zoom += 0.5f * Gdx.graphics.getDeltaTime();
+		} else if (Gdx.input.isKeyPressed(Keys.Q)) {
+			camera.zoom += -0.5f * Gdx.graphics.getDeltaTime();
+		}
+
+		camera.update();
 	}
 
 }
