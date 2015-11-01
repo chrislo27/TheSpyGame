@@ -1,5 +1,8 @@
 package chrislo27.spygame.entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+
 import chrislo27.spygame.entity.render.EntityRenderer;
 import chrislo27.spygame.util.BodyType;
 import chrislo27.spygame.util.Bounds;
@@ -7,6 +10,7 @@ import chrislo27.spygame.util.Bounds.Boundable;
 import chrislo27.spygame.util.CollisionAxis;
 import chrislo27.spygame.world.World;
 import ionium.registry.GlobalVariables;
+import ionium.templates.Main;
 import ionium.util.Direction;
 
 public abstract class Entity implements Boundable {
@@ -49,10 +53,11 @@ public abstract class Entity implements Boundable {
 
 	public void tickUpdate() {
 		if (getBodyType() == BodyType.DYNAMIC) {
+			long nano = System.nanoTime();
 			updatePositionFromVelocity(CollisionAxis.X);
 			updatePositionFromVelocity(CollisionAxis.Y);
 		}
-		
+
 		veloY -= 2f;
 	}
 
@@ -72,12 +77,12 @@ public abstract class Entity implements Boundable {
 
 				if (e != null) {
 					newVelocity = 0;
-					
-					if(e == this && e.bounds.y < 0){
+
+					if (e == this && e.bounds.y < 0) {
 						// hit floor, colliding with yourself
 						e.bounds.y = 0;
 					}
-					
+
 					break;
 				} else {
 					float amt = Math.signum(transformedVelo) * World.UNIT_PX;
@@ -118,10 +123,10 @@ public abstract class Entity implements Boundable {
 			if (e == this) continue;
 			if (!e.canEntityCollideIntoMe(this)) continue;
 
-			int eX = ((int) e.bounds.x * World.PX_UNIT);
-			int eY = ((int) e.bounds.y * World.PX_UNIT);
-			int eWidth = ((int) e.bounds.width * World.PX_UNIT);
-			int eHeight = ((int) e.bounds.height * World.PX_UNIT);
+			int eX = (int) (e.bounds.x * World.PX_UNIT);
+			int eY = (int) (e.bounds.y * World.PX_UNIT);
+			int eWidth = (int) (e.bounds.width * World.PX_UNIT);
+			int eHeight = (int) (e.bounds.height * World.PX_UNIT);
 
 			switch (direction) {
 			case DOWN:

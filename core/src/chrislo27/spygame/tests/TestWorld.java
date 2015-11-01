@@ -9,6 +9,14 @@ public class TestWorld extends World{
 		super(sizex, sizey);
 		
 		entities.add(new EntityPlayer(this, 0, 10));
+		entities.add(new EntityPlayer(this, 0, 8));
+		entities.add(new EntityPlayer(this, 0, 6));
+		entities.add(new EntityPlayer(this, 0, 4));
+		
+		entities.add(new EntityPlayer(this, 4, 10));
+		entities.add(new EntityPlayer(this, 4, 8));
+		entities.add(new EntityPlayer(this, 2, 6));
+		entities.add(new EntityPlayer(this, 8, 4));
 	}
 
 }
