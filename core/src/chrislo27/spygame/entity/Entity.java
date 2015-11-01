@@ -53,12 +53,13 @@ public abstract class Entity implements Boundable {
 
 	public void tickUpdate() {
 		if (getBodyType() == BodyType.DYNAMIC) {
-			long nano = System.nanoTime();
+			if(getEntityColliding(Direction.DOWN) == null){
+				veloY -= world.gravity;
+			}
+			
 			updatePositionFromVelocity(CollisionAxis.X);
 			updatePositionFromVelocity(CollisionAxis.Y);
 		}
-
-		veloY -= 2f;
 	}
 
 	private void updatePositionFromVelocity(CollisionAxis axis) {
