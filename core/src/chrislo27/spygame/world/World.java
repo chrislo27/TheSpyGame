@@ -29,7 +29,11 @@ public class World {
 	}
 	
 	public void tickUpdate(){
-		
+		for(int i = 0; i < entities.size; i++){
+			Entity e = entities.get(i);
+			
+			e.tickUpdate();
+		}
 	}
 	
 	public void renderUpdate(){
