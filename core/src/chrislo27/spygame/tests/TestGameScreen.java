@@ -30,10 +30,12 @@ public class TestGameScreen extends Updateable{
 
 	@Override
 	public void renderUpdate() {
+		world.renderUpdate();
 	}
 
 	@Override
 	public void tickUpdate() {
+		world.tickUpdate();
 	}
 
 	@Override
