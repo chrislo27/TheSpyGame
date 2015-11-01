@@ -28,4 +28,8 @@ public class World {
 		entities.clear();
 	}
 	
+	public void tickUpdate(){
+		
+	}
+	
 }
