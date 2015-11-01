@@ -130,27 +130,40 @@ public abstract class Entity implements Boundable {
 
 			switch (direction) {
 			case DOWN:
-				// bottom side next to e's top side
-				if (transformedY - 1 == (eY + eHeight)) {
-					return e;
+				// check if X position is within the other entity
+				if (transformedX + transformedWidth >= eX && transformedX <= eX + eWidth) {
+					// bottom side next to e's top side
+					if (transformedY - 1 == (eY + eHeight)) {
+						return e;
+					}
 				}
 				break;
 			case LEFT:
-				// left side next to e's right side
-				if (transformedX - 1 == (eX + eWidth)) {
-					return e;
+				// check if Y position is within the other entity
+				if (transformedY + transformedHeight >= eY && transformedY <= eY + eHeight) {
+					// left side next to e's right side
+					if (transformedX - 1 == (eX + eWidth)) {
+						return e;
+					}
 				}
 				break;
 			case RIGHT:
-				// right side next to e's left side
-				if (transformedX + transformedWidth + 1 == eX) {
-					return e;
+				// check if Y position is within the other entity
+				if (transformedY + transformedHeight >= eY && transformedY <= eY + eHeight) {
+					// right side next to e's left side
+					if (transformedX + transformedWidth + 1 == eX) {
+						return e;
+					}
 				}
 				break;
 			case UP:
-				// top side next to e's bottom side
-				if (transformedY + transformedHeight + 1 == eY) {
-					return e;
+
+				// check if X position is within the other entity
+				if (transformedX + transformedWidth >= eX && transformedX <= eX + eWidth) {
+					// top side next to e's bottom side
+					if (transformedY + transformedHeight + 1 == eY) {
+						return e;
+					}
 				}
 				break;
 			default:
