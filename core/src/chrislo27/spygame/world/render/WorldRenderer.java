@@ -23,5 +23,9 @@ public class WorldRenderer {
 		camera.setToOrtho(false, GlobalVariables.getInt("DEFAULT_WIDTH") * 1f / World.PX_UNIT,
 				GlobalVariables.getInt("DEFAULT_HEIGHT") * 1f / World.PX_UNIT);
 	}
+	
+	public void render(){
+		
+	}
 
 }
