@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.utils.Array;
+import com.bitfire.utils.ShaderLoader;
 
 import chrislo27.spygame.load.GlobalVariableTweaks;
 import chrislo27.spygame.load.LanguageAdder;
@@ -40,6 +41,7 @@ public class Main extends ionium.templates.Main {
 
 		GlobalVariableTweaks.tweak();
 		LanguageAdder.addLanguages();
+		ShaderLoader.BasePath = "/shaders";
 
 		AssetRegistry.instance().addAssetLoader(new AssetLoader());
 
