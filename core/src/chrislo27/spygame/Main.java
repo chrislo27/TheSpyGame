@@ -41,7 +41,7 @@ public class Main extends ionium.templates.Main {
 
 		GlobalVariableTweaks.tweak();
 		LanguageAdder.addLanguages();
-		ShaderLoader.BasePath = "/shaders";
+		ShaderLoader.BasePath = "shaders/";
 
 		AssetRegistry.instance().addAssetLoader(new AssetLoader());
 
