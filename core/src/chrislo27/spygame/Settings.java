@@ -15,6 +15,7 @@ public class Settings {
 	public int actualWidth = GlobalVariables.getInt("DEFAULT_WIDTH");
 	public int actualHeight = GlobalVariables.getInt("DEFAULT_HEIGHT");
 	public boolean fullscreen = false;
+	public boolean hasResolutionBeenSaved = false;
 
 	private Settings() {
 	}
@@ -37,6 +38,7 @@ public class Settings {
 		actualWidth = pref.getInteger("actualWidth", 0);
 		actualHeight = pref.getInteger("actualHeight", 0);
 		fullscreen = pref.getBoolean("fullscreen", true);
+		hasResolutionBeenSaved = pref.getBoolean("hasResolutionBeenSaved", false);
 	}
 
 	public static Preferences getPrefWithGamePrefix(String ref) {
@@ -46,7 +48,7 @@ public class Settings {
 	public void save() {
 		pref.putFloat("sound", soundVolume).putFloat("music", musicVolume)
 				.putInteger("actualWidth", actualWidth).putInteger("actualHeight", actualHeight)
-				.flush();
+				.putBoolean("hasResolutionBeenSaved", true).flush();
 	}
 
 	public static Preferences getSettingsPreferences() {

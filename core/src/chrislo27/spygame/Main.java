@@ -49,9 +49,9 @@ public class Main extends ionium.templates.Main {
 	}
 
 	private void resizeScreenFromSettings() {
-		if (Gdx.graphics.getWidth() != Settings.instance().actualWidth
+		if ((Gdx.graphics.getWidth() != Settings.instance().actualWidth
 				|| Gdx.graphics.getHeight() != Settings.instance().actualHeight
-				|| Gdx.graphics.isFullscreen() != Settings.instance().fullscreen) {
+				|| Gdx.graphics.isFullscreen() != Settings.instance().fullscreen) && Settings.instance().hasResolutionBeenSaved) {
 			Gdx.graphics.setDisplayMode(Settings.instance().actualWidth,
 					Settings.instance().actualHeight, Settings.instance().fullscreen);
 		}
