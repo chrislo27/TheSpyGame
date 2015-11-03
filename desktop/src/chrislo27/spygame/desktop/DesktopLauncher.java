@@ -4,6 +4,7 @@ import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import chrislo27.spygame.Main;
+import chrislo27.spygame.load.GlobalVariableTweaks;
 import ionium.desktop.GameLwjglApp;
 import ionium.registry.GlobalVariables;
 import ionium.util.Logger;
@@ -13,6 +14,8 @@ public class DesktopLauncher {
 	private static Logger logger;
 
 	public static void main(String[] arg) {
+		GlobalVariableTweaks.tweak();
+		
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "";
 		config.width = GlobalVariables.getInt("DEFAULT_WIDTH");
