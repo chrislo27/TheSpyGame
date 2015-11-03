@@ -30,7 +30,7 @@ public class Settings {
 	private Preferences pref;
 
 	private void loadResources() {
-		pref = getPref("settings");
+		pref = getPrefWithGamePrefix("settings");
 
 		soundVolume = pref.getFloat("soundVolume", 1f);
 		musicVolume = pref.getFloat("musicVolume", 1f);
@@ -39,7 +39,7 @@ public class Settings {
 		fullscreen = pref.getBoolean("fullscreen", true);
 	}
 
-	public static Preferences getPref(String ref) {
+	public static Preferences getPrefWithGamePrefix(String ref) {
 		return Gdx.app.getPreferences("TheSpyGame-" + ref);
 	}
 
@@ -49,7 +49,7 @@ public class Settings {
 				.flush();
 	}
 
-	public static Preferences getPreferences() {
+	public static Preferences getSettingsPreferences() {
 		return instance().pref;
 	}
 }

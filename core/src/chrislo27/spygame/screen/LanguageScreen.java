@@ -57,7 +57,7 @@ public class LanguageScreen extends ScreenBase {
 			allLanguages.add(new Flag(locale));
 		}
 		
-		Localization.instance().loadFromSettings(Settings.getPreferences());
+		Localization.instance().loadFromSettings(Settings.getSettingsPreferences());
 
 	}
 
@@ -109,7 +109,7 @@ public class LanguageScreen extends ScreenBase {
 					&& Main.convertY(Gdx.input.getY()) <= y + tex.getHeight()) {
 				if (Utils.isButtonJustPressed(Buttons.LEFT)) {
 					Localization.instance().setLanguage(locale);
-					Localization.instance().saveToSettings(Settings.getPreferences());
+					Localization.instance().saveToSettings(Settings.getSettingsPreferences());
 				}
 			}
 
