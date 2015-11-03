@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import chrislo27.spygame.Main;
 import chrislo27.spygame.load.GlobalVariableTweaks;
+import ionium.desktop.ArgumentInferredLwjglAppConfig;
 import ionium.desktop.GameLwjglApp;
 import ionium.registry.GlobalVariables;
 import ionium.util.Logger;
@@ -13,10 +14,10 @@ public class DesktopLauncher {
 
 	private static Logger logger;
 
-	public static void main(String[] arg) {
+	public static void main(String[] args) {
 		GlobalVariableTweaks.tweak();
 		
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		ArgumentInferredLwjglAppConfig config = new ArgumentInferredLwjglAppConfig(args);
 		config.title = "";
 		config.width = GlobalVariables.getInt("DEFAULT_WIDTH");
 		config.height = GlobalVariables.getInt("DEFAULT_HEIGHT");
@@ -25,6 +26,9 @@ public class DesktopLauncher {
 		config.backgroundFPS = GlobalVariables.getInt("MAX_FPS");
 		config.resizable = false;
 		config.vSyncEnabled = true;
+		config.samples = 4;
+		
+		config.inferFromArguments();
 
 		config.addIcon("images/icon/icon32.png", FileType.Internal);
 		config.addIcon("images/icon/icon16.png", FileType.Internal);
