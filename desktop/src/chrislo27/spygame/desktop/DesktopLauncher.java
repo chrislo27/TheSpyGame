@@ -9,6 +9,8 @@ import ionium.desktop.ArgumentInferredLwjglAppConfig;
 import ionium.desktop.GameLwjglApp;
 import ionium.registry.GlobalVariables;
 import ionium.util.Logger;
+import ionium.util.resolution.Resolution;
+import ionium.util.resolution.ResolutionDeterminator;
 
 public class DesktopLauncher {
 
@@ -27,6 +29,8 @@ public class DesktopLauncher {
 		config.resizable = false;
 		config.vSyncEnabled = true;
 		config.samples = 4;
+		
+		ResolutionDeterminator.determineIdealResolution(config, Resolution.get169ResolutionsList());
 		
 		config.inferFromArguments();
 
