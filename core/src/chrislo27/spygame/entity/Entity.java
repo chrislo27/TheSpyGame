@@ -18,17 +18,19 @@ public abstract class Entity implements Boundable {
 	public Bounds bounds = new Bounds();
 	public float veloX = 0;
 	public float veloY = 0;
+	
 	public float lerpX = 0;
 	public float lerpY = 0;
+	private float lerpDeltaX = 0;
+	private float lerpDeltaY = 0;
+	
 	protected World world;
-
 	protected EntityRenderer renderer;
 
 	public Entity(World world, float x, float y) {
 		this.world = world;
 
-		bounds.x = x;
-		bounds.y = y;
+		setPosition(x, y);
 	}
 
 	@Override
@@ -41,10 +43,16 @@ public abstract class Entity implements Boundable {
 		bounds.y = y;
 		lerpX = x;
 		lerpY = y;
+		lerpDeltaX = 0;
+		lerpDeltaY = 0;
 	}
 
 	public EntityRenderer getRenderer() {
 		return renderer;
+	}
+	
+	public void interpolatePosition(){
+		
 	}
 
 	/**
