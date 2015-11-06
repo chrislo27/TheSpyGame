@@ -12,7 +12,7 @@ public class RenderPlayer extends EntityRenderer<EntityPlayer>{
 
 	@Override
 	public void render(WorldRenderer renderer) {
-		renderer.batch.draw(AssetRegistry.getTexture("player_test"), entity.bounds.x, entity.bounds.y, 1, 1);
+		renderer.batch.draw(AssetRegistry.getTexture("player_test"), entity.lerpX, entity.lerpY, 1, 1);
 	}
 
 	
