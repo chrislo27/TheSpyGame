@@ -21,6 +21,9 @@ import ionium.registry.ScreenRegistry;
 import ionium.util.DebugSetting;
 import ionium.util.Logger;
 import ionium.util.i18n.Localization;
+import ionium.util.resolution.Resolutable;
+import ionium.util.resolution.Resolution;
+import ionium.util.resolution.ResolutionDeterminator;
 
 public class Main extends ionium.templates.Main {
 
@@ -49,11 +52,54 @@ public class Main extends ionium.templates.Main {
 	}
 
 	private void resizeScreenFromSettings() {
-		if ((Gdx.graphics.getWidth() != Settings.instance().actualWidth
-				|| Gdx.graphics.getHeight() != Settings.instance().actualHeight
-				|| Gdx.graphics.isFullscreen() != Settings.instance().fullscreen) && Settings.instance().hasResolutionBeenSaved) {
-			Gdx.graphics.setDisplayMode(Settings.instance().actualWidth,
-					Settings.instance().actualHeight, Settings.instance().fullscreen);
+		if (!Settings.instance().hasResolutionBeenSaved) {
+			Resolutable res = new Resolutable(){
+
+				private int width, height;
+				private boolean fs;
+				
+				@Override
+				public void setWidth(int w) {
+					width = w;
+				}
+
+				@Override
+				public void setHeight(int h) {
+					height = h;
+				}
+
+				@Override
+				public void setFullscreen(boolean fs) {
+					this.fs = fs;
+				}
+
+				@Override
+				public int getWidth() {
+					return width;
+				}
+
+				@Override
+				public int getHeight() {
+					return height;
+				}
+
+				@Override
+				public boolean isFullscreen() {
+					return fs;
+				}
+				
+			};
+			
+			ResolutionDeterminator.determineIdealResolution(res, Resolution.get169ResolutionsList());
+			
+			Gdx.graphics.setDisplayMode(res.getWidth(), res.getHeight(), true);
+		} else {
+			if ((Gdx.graphics.getWidth() != Settings.instance().actualWidth
+					|| Gdx.graphics.getHeight() != Settings.instance().actualHeight
+					|| Gdx.graphics.isFullscreen() != Settings.instance().fullscreen)) {
+				Gdx.graphics.setDisplayMode(Settings.instance().actualWidth,
+						Settings.instance().actualHeight, Settings.instance().fullscreen);
+			}
 		}
 	}
 

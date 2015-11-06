@@ -30,8 +30,6 @@ public class DesktopLauncher {
 		config.vSyncEnabled = true;
 		config.samples = 4;
 		
-		ResolutionDeterminator.determineIdealResolution(config, Resolution.get169ResolutionsList());
-		
 		config.inferFromArguments();
 
 		config.addIcon("images/icon/icon32.png", FileType.Internal);
