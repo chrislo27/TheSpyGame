@@ -12,4 +12,6 @@ public abstract class EntityRenderer<T> {
 	
 	public abstract void render(WorldRenderer renderer);
 	
+	public abstract void renderUpdate(WorldRenderer renderer);
+	
 }

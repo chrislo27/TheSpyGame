@@ -11,10 +11,7 @@ public class RenderPlayer extends EntityRenderer<EntityPlayer>{
 	}
 
 	@Override
-	public void render(WorldRenderer renderer) {
-		entity.interpolatePosition();
-		
-		// the head is where the collision box top side is always
+	public void render(WorldRenderer renderer) {// the head is where the collision box top side is always
 		renderer.batch.draw(AssetRegistry.getTexture("entity_player_headWithoutGears"), entity.lerpX, entity.lerpY, 1, 1);
 		renderer.batch.draw(AssetRegistry.getTexture("entity_player_leftGear"), entity.lerpX, entity.lerpY, 1, 1);
 		renderer.batch.draw(AssetRegistry.getTexture("entity_player_rightGear"), entity.lerpX, entity.lerpY, 1, 1);
@@ -23,6 +20,11 @@ public class RenderPlayer extends EntityRenderer<EntityPlayer>{
 		renderer.batch.draw(AssetRegistry.getTexture("entity_player_middle"), entity.lerpX, entity.lerpY, 1, 1);
 		renderer.batch.draw(AssetRegistry.getTexture("entity_player_bottom"), entity.lerpX, entity.lerpY, 1, 1);
 		
+	}
+
+	@Override
+	public void renderUpdate(WorldRenderer renderer) {
+		entity.interpolatePosition();
 	}
 
 	

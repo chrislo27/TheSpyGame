@@ -45,6 +45,8 @@ public class WorldRenderer {
 		for (int i = 0; i < world.entities.size; i++) {
 			Entity e = world.entities.get(i);
 
+			e.getRenderer().renderUpdate(this);
+			
 			e.getRenderer().render(this);
 		}
 
