@@ -1,7 +1,6 @@
 package chrislo27.spygame.entity;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 
 import chrislo27.spygame.entity.render.EntityRenderer;
 import chrislo27.spygame.util.BodyType;
@@ -10,7 +9,6 @@ import chrislo27.spygame.util.Bounds.Boundable;
 import chrislo27.spygame.util.CollisionAxis;
 import chrislo27.spygame.world.World;
 import ionium.registry.GlobalVariables;
-import ionium.templates.Main;
 import ionium.util.Direction;
 
 public abstract class Entity implements Boundable {
@@ -18,12 +16,12 @@ public abstract class Entity implements Boundable {
 	public Bounds bounds = new Bounds();
 	public float veloX = 0;
 	public float veloY = 0;
-	
+
 	public float lerpX = 0;
 	public float lerpY = 0;
 	private float lerpDeltaX = 0;
 	private float lerpDeltaY = 0;
-	
+
 	protected World world;
 	protected EntityRenderer renderer;
 
@@ -37,8 +35,8 @@ public abstract class Entity implements Boundable {
 	public Bounds getBounds() {
 		return bounds;
 	}
-	
-	public void setPosition(float x, float y){
+
+	public void setPosition(float x, float y) {
 		bounds.x = x;
 		bounds.y = y;
 		lerpX = x;
@@ -50,9 +48,23 @@ public abstract class Entity implements Boundable {
 	public EntityRenderer getRenderer() {
 		return renderer;
 	}
-	
-	public void interpolatePosition(){
-		
+
+	public void interpolatePosition() {
+		float deltaTime = Gdx.graphics.getDeltaTime() * GlobalVariables.getInt("TICKS");
+
+		float adjustX = lerpDeltaX * deltaTime;
+		float adjustY = lerpDeltaY * deltaTime;
+
+		if (lerpX != bounds.x) lerpX += adjustX;
+		if (lerpY != bounds.y) lerpY += adjustY;
+
+		if (Math.abs(bounds.x - lerpX) <= World.UNIT_PX) {
+			lerpX = bounds.x;
+		}
+
+		if (Math.abs(bounds.y - lerpY) <= World.UNIT_PX) {
+			lerpY = bounds.y;
+		}
 	}
 
 	/**
@@ -70,13 +82,16 @@ public abstract class Entity implements Boundable {
 
 	public void tickUpdate() {
 		if (getBodyType() == BodyType.DYNAMIC) {
-			if(getEntityColliding(Direction.DOWN) == null){
+			if (getEntityColliding(Direction.DOWN) == null) {
 				veloY -= world.gravity;
 			}
-			
+
 			updatePositionFromVelocity(CollisionAxis.X);
 			updatePositionFromVelocity(CollisionAxis.Y);
 		}
+		
+		lerpDeltaX = bounds.x - lerpX;
+		lerpDeltaY = bounds.y - lerpY;
 	}
 
 	private void updatePositionFromVelocity(CollisionAxis axis) {

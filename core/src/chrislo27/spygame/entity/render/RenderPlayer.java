@@ -12,6 +12,7 @@ public class RenderPlayer extends EntityRenderer<EntityPlayer>{
 
 	@Override
 	public void render(WorldRenderer renderer) {
+		entity.interpolatePosition();
 		renderer.batch.draw(AssetRegistry.getTexture("player_test"), entity.lerpX, entity.lerpY, 1, 1);
 	}
 
