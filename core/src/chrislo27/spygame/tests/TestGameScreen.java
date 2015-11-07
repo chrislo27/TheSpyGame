@@ -30,6 +30,7 @@ public class TestGameScreen extends Updateable{
 
 	@Override
 	public void renderUpdate() {
+		world.inputUpdate();
 		world.renderUpdate();
 	}
 
