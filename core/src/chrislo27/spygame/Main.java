@@ -171,6 +171,16 @@ public class Main extends ionium.templates.Main {
 	}
 
 	@Override
+	public void resize(int width, int height){
+		super.resize(width, height);
+		
+		Settings.instance().actualWidth = Gdx.graphics.getWidth();
+		Settings.instance().actualHeight = Gdx.graphics.getHeight();
+		Settings.instance().fullscreen = Gdx.graphics.isFullscreen();
+		Settings.instance().save();
+	}
+	
+	@Override
 	public void dispose() {
 		super.dispose();
 
