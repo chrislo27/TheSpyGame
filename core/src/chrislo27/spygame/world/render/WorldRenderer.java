@@ -37,7 +37,7 @@ public class WorldRenderer {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 
-		batch.draw(AssetRegistry.getTexture("starrysky"), 0, 0, camera.viewportWidth,
+		batch.draw(AssetRegistry.getTexture("test_starrysky"), 0, 0, camera.viewportWidth,
 				camera.viewportHeight);
 
 		batch.flush();
