@@ -1,8 +1,9 @@
 package chrislo27.spygame.entity.render;
 
+import chrislo27.spygame.entity.Entity;
 import chrislo27.spygame.world.render.WorldRenderer;
 
-public abstract class EntityRenderer<T> {
+public abstract class EntityRenderer<T extends Entity> {
 	
 	T entity;
 	
