@@ -174,7 +174,7 @@ public class Main extends ionium.templates.Main {
 	public void dispose() {
 		super.dispose();
 
-		Settings.getSettingsPreferences().flush();
+		Settings.instance().save();
 	}
 
 }
