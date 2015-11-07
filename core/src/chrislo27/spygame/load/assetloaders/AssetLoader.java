@@ -21,14 +21,26 @@ public class AssetLoader implements IAssetLoader {
 	}
 	
 	private void loadDebugThings(AssetManager manager){
-		manager.load(AssetMap.add("player_test", "images/entity/player.png"), Texture.class);
-		manager.load(AssetMap.add("starrysky", "images/starrysky.png"), Texture.class);
+		manager.load(AssetMap.add("test_starrysky", "images/starrysky.png"), Texture.class);
+	}
+	
+	private void loadEntities(AssetManager manager){
+		manager.load(AssetMap.add("entity_player_full", "images/entity/player.png"), Texture.class);
+		manager.load(AssetMap.add("entity_player_bottom", "images/entity/player/"), Texture.class);
+		manager.load(AssetMap.add("entity_player_middle", "images/entity/player/"), Texture.class);
+		manager.load(AssetMap.add("entity_player_top", "images/entity/player/"), Texture.class);
+		manager.load(AssetMap.add("entity_player_gears", "images/entity/player/"), Texture.class);
+		manager.load(AssetMap.add("entity_player_leftGear", "images/entity/player/"), Texture.class);
+		manager.load(AssetMap.add("entity_player_rightGear", "images/entity/player/"), Texture.class);
+		manager.load(AssetMap.add("entity_player_head", "images/entity/player/"), Texture.class);
+		manager.load(AssetMap.add("entity_player_headWithoutGears", "images/entity/player/"), Texture.class);
+		
 	}
 	
 	@Override
 	public void addManagedAssets(AssetManager manager) {
 		loadFlags(manager);
-		
+		loadEntities(manager);
 		loadDebugThings(manager);
 	}
 
