@@ -35,8 +35,8 @@ public class Settings {
 
 		soundVolume = pref.getFloat("soundVolume", 1f);
 		musicVolume = pref.getFloat("musicVolume", 1f);
-		actualWidth = pref.getInteger("actualWidth", 0);
-		actualHeight = pref.getInteger("actualHeight", 0);
+		actualWidth = pref.getInteger("actualWidth", GlobalVariables.getInt("DEFAULT_WIDTH"));
+		actualHeight = pref.getInteger("actualHeight", GlobalVariables.getInt("DEFAULT_HEIGHT"));
 		fullscreen = pref.getBoolean("fullscreen", true);
 		hasResolutionBeenSaved = pref.getBoolean("hasResolutionBeenSaved", false);
 	}
@@ -48,7 +48,8 @@ public class Settings {
 	public void save() {
 		pref.putFloat("sound", soundVolume).putFloat("music", musicVolume)
 				.putInteger("actualWidth", actualWidth).putInteger("actualHeight", actualHeight)
-				.putBoolean("hasResolutionBeenSaved", true).flush();
+				.putBoolean("fullscreen", fullscreen).putBoolean("hasResolutionBeenSaved", true)
+				.flush();
 	}
 
 	public static Preferences getSettingsPreferences() {
