@@ -84,12 +84,23 @@ public abstract class Entity implements Boundable {
 		if (getBodyType() == BodyType.DYNAMIC) {
 			if (getEntityColliding(Direction.DOWN) == null) {
 				veloY -= world.gravity;
+			} else {
+				if (veloX != 0) {
+					float drag = World.DRAG / GlobalVariables.getInt("TICKS");
+					if (Math.abs(veloX) <= drag) {
+						veloX = 0;
+					} else if (veloX > 0) {
+						veloX -= drag;
+					} else {
+						veloX += drag;
+					}
+				}
 			}
 
 			updatePositionFromVelocity(CollisionAxis.X);
 			updatePositionFromVelocity(CollisionAxis.Y);
 		}
-		
+
 		lerpDeltaX = bounds.x - lerpX;
 		lerpDeltaY = bounds.y - lerpY;
 	}
