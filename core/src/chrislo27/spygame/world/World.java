@@ -19,7 +19,7 @@ public class World {
 
 	public Array<Entity> entities = new Array<>();
 
-	float sizex, sizey;
+	public final float sizex, sizey;
 
 	public World(float sizex, float sizey) {
 		this.sizex = sizex;
