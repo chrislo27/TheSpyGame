@@ -52,30 +52,10 @@ public class WorldRenderer {
 
 		batch.end();
 		batch.setProjectionMatrix(main.camera.combined);
-
-		if (Gdx.input.isKeyPressed(Keys.D)) {
-			camera.translate(4f * Gdx.graphics.getDeltaTime(), 0);
-		} else if (Gdx.input.isKeyPressed(Keys.A)) {
-			camera.translate(-4f * Gdx.graphics.getDeltaTime(), 0);
-		}
-		if (Gdx.input.isKeyPressed(Keys.W)) {
-			camera.translate(0, 4f * Gdx.graphics.getDeltaTime());
-		} else if (Gdx.input.isKeyPressed(Keys.S)) {
-			camera.translate(0, -4f * Gdx.graphics.getDeltaTime());
-		}
-
-		if (Gdx.input.isKeyPressed(Keys.Z)) {
-			camera.position.z += 0.5f * Gdx.graphics.getDeltaTime();
-		} else if (Gdx.input.isKeyPressed(Keys.X)) {
-			camera.position.z += -0.5f * Gdx.graphics.getDeltaTime();
-		}
 		
-		if(Gdx.input.isKeyPressed(Keys.Q)){
-			camera.rotate(-90f * Gdx.graphics.getDeltaTime());
-		}else if(Gdx.input.isKeyPressed(Keys.E)){
-			camera.rotate(90f * Gdx.graphics.getDeltaTime());
-		}
-
+	}
+	
+	public void renderUpdate(){
 		camera.update();
 	}
 
