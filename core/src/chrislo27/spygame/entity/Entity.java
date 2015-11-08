@@ -89,10 +89,8 @@ public abstract class Entity implements Boundable {
 					float drag = World.DRAG / GlobalVariables.getInt("TICKS");
 					if (Math.abs(veloX) <= drag) {
 						veloX = 0;
-					} else if (veloX > 0) {
-						veloX -= drag;
 					} else {
-						veloX += drag;
+						veloX -= drag * Math.signum(veloX);
 					}
 				}
 			}
@@ -103,6 +101,7 @@ public abstract class Entity implements Boundable {
 
 		lerpDeltaX = bounds.x - lerpX;
 		lerpDeltaY = bounds.y - lerpY;
+
 	}
 
 	private void updatePositionFromVelocity(CollisionAxis axis) {
