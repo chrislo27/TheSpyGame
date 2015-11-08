@@ -1,10 +1,12 @@
 package chrislo27.spygame.world.render;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector3;
 
 import chrislo27.spygame.Main;
 import chrislo27.spygame.entity.Entity;
@@ -18,6 +20,9 @@ public class WorldRenderer {
 	public SpriteBatch batch;
 	public Main main;
 	public OrthographicCamera camera;
+
+	private Vector3 cameraTarget = new Vector3();
+	private final float cameraSpeed = 5f;
 
 	public WorldRenderer(World world, Main main) {
 		this.world = world;
@@ -46,16 +51,28 @@ public class WorldRenderer {
 			Entity e = world.entities.get(i);
 
 			e.getRenderer().renderUpdate(this);
-			
+
 			e.getRenderer().render(this);
 		}
 
 		batch.end();
 		batch.setProjectionMatrix(main.camera.combined);
-		
+
 	}
-	
-	public void renderUpdate(){
+
+	public void renderUpdate() {
+		Entity player = world.entities.get(0);
+		cameraTarget.set(player.bounds.x + player.bounds.width / 2,
+				player.bounds.y + player.bounds.height / 2, 0);
+
+		camera.position.interpolate(cameraTarget, cameraSpeed * Gdx.graphics.getDeltaTime(),
+				Interpolation.linear);
+
+		camera.position.x = MathUtils.clamp(camera.position.x, 0 + camera.viewportWidth / 2f,
+				world.sizex - camera.viewportWidth / 2);
+		camera.position.y = MathUtils.clamp(camera.position.y, 0 + camera.viewportHeight / 2f,
+				world.sizey - camera.viewportHeight / 2);
+
 		camera.update();
 	}
 
