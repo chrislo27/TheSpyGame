@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
+import chrislo27.spygame.entity.Controllable;
 import chrislo27.spygame.entity.Entity;
 
 public class World {
@@ -20,6 +21,8 @@ public class World {
 	public Array<Entity> entities = new Array<>();
 
 	public final float sizex, sizey;
+
+	public Entity currentFocusedEntity = null;
 
 	public World(float sizex, float sizey) {
 		this.sizex = sizex;
@@ -45,18 +48,21 @@ public class World {
 	}
 
 	public void inputUpdate() {
-		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-			entities.get(0).veloX = MathUtils.clamp(entities.get(0).veloX
-					- (Gdx.graphics.getDeltaTime() * 50f) - (Gdx.graphics.getDeltaTime() * DRAG),
-					-5f, 5f);
-		} else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			entities.get(0).veloX = MathUtils.clamp(entities.get(0).veloX
-					+ (Gdx.graphics.getDeltaTime() * 50f) + (Gdx.graphics.getDeltaTime() * DRAG),
-					-5f, 5f);
-		}
 
-		if (Gdx.input.isKeyJustPressed(Keys.UP)) {
-			entities.get(0).veloY = 15f;
+		if (currentFocusedEntity != null) {
+			if(currentFocusedEntity instanceof Controllable){
+				if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+					((Controllable) currentFocusedEntity).onLeft();
+				} else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+					((Controllable) currentFocusedEntity).onRight();
+				}
+
+				if (Gdx.input.isKeyPressed(Keys.UP)) {
+					((Controllable) currentFocusedEntity).onUp();
+				}else if(Gdx.input.isKeyPressed(Keys.DOWN)){
+					((Controllable) currentFocusedEntity).onDown();
+				}
+			}
 		}
 	}
 

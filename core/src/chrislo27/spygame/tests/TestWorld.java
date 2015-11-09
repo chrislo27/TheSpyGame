@@ -8,7 +8,11 @@ public class TestWorld extends World{
 	public TestWorld(float sizex, float sizey) {
 		super(sizex, sizey);
 		
-		entities.add(new EntityPlayer(this, 4, 10));
+		EntityPlayer player = new EntityPlayer(this, 4, 10);
+		
+		entities.add(player);
+		
+		currentFocusedEntity = player;
 	}
 
 }
