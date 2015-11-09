@@ -61,9 +61,11 @@ public class WorldRenderer {
 	}
 
 	public void renderUpdate() {
-		Entity player = world.entities.get(0);
-		cameraTarget.set(player.bounds.x + player.bounds.width / 2,
-				player.bounds.y + player.bounds.height / 2, 0);
+		Entity player = world.currentFocusedEntity;
+		if (player != null) {
+			cameraTarget.set(player.bounds.x + player.bounds.width / 2,
+					player.bounds.y + player.bounds.height / 2, 0);
+		}
 
 		camera.position.interpolate(cameraTarget, cameraSpeed * Gdx.graphics.getDeltaTime(),
 				Interpolation.linear);
