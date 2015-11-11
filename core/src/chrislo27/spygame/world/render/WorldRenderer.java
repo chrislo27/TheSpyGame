@@ -65,6 +65,10 @@ public class WorldRenderer {
 	}
 
 	public void renderUpdate() {
+		if (world == null) {
+			return;
+		}
+		
 		Entity player = world.currentFocusedEntity;
 		if (player != null) {
 			cameraTarget.set(player.bounds.x + player.bounds.width / 2,
