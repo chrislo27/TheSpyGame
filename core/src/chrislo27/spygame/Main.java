@@ -13,6 +13,7 @@ import chrislo27.spygame.load.GlobalVariableTweaks;
 import chrislo27.spygame.load.LanguageAdder;
 import chrislo27.spygame.load.assetloaders.AssetLoader;
 import chrislo27.spygame.screen.LanguageScreen;
+import chrislo27.spygame.screen.LevelEditorScreen;
 import chrislo27.spygame.screen.MainMenuScreen;
 import chrislo27.spygame.screen.SettingsScreen;
 import chrislo27.spygame.tests.TestGameScreen;
@@ -113,6 +114,7 @@ public class Main extends ionium.templates.Main {
 		reg.add("settings", new SettingsScreen(this));
 		reg.add("langSelect", new LanguageScreen(this));
 		reg.add("testGame", new TestGameScreen(this));
+		reg.add("levelEditor", new LevelEditorScreen(this));
 	}
 
 	@Override
