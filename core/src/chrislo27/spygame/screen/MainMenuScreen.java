@@ -35,6 +35,7 @@ public class MainMenuScreen extends Updateable<Main> {
 			}
 
 		}.useExitTexture());
+		
 		container.elements.add(new SettingsButton(0, 0, 64, 64) {
 
 			@Override
@@ -50,6 +51,15 @@ public class MainMenuScreen extends Updateable<Main> {
 			@Override
 			public boolean onLeftClick() {
 				main.setScreen(ScreenRegistry.get("testGame"));
+				return true;
+			}
+		});
+		
+		container.elements.add(new Button(0.4f, 0.125f, 0.2f, 0.05f, "menu.levelEditor") {
+
+			@Override
+			public boolean onLeftClick() {
+				main.setScreen(ScreenRegistry.get("levelEditor"));
 				return true;
 			}
 		});
