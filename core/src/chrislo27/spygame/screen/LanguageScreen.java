@@ -9,13 +9,13 @@ import chrislo27.spygame.Main;
 import chrislo27.spygame.Settings;
 import ionium.registry.AssetRegistry;
 import ionium.registry.ScreenRegistry;
+import ionium.screen.Updateable;
 import ionium.ui.BackButton;
-import ionium.util.MathHelper;
 import ionium.util.Utils;
 import ionium.util.i18n.Localization;
 import ionium.util.i18n.NamedLocale;
 
-public class LanguageScreen extends ScreenBase {
+public class LanguageScreen extends Updateable<Main> {
 
 	private Array<Flag> allLanguages = new Array<>();
 

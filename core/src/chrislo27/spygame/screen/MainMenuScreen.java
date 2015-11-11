@@ -5,11 +5,12 @@ import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.Main;
 import ionium.registry.ScreenRegistry;
+import ionium.screen.Updateable;
 import ionium.ui.BackButton;
 import ionium.ui.Button;
 import ionium.ui.SettingsButton;
 
-public class MainMenuScreen extends ScreenBase {
+public class MainMenuScreen extends Updateable<Main> {
 
 	public MainMenuScreen(Main m) {
 		super(m);

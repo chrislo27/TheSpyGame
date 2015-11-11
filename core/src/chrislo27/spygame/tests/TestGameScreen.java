@@ -3,11 +3,11 @@ package chrislo27.spygame.tests;
 import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.Main;
-import chrislo27.spygame.screen.ScreenBase;
 import chrislo27.spygame.world.World;
 import chrislo27.spygame.world.render.WorldRenderer;
+import ionium.screen.Updateable;
 
-public class TestGameScreen extends ScreenBase {
+public class TestGameScreen extends Updateable<Main> {
 
 	World world;
 	WorldRenderer renderer;

@@ -3,8 +3,9 @@ package chrislo27.spygame.screen;
 import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.Main;
+import ionium.screen.Updateable;
 
-public class LevelEditorScreen extends ScreenBase{
+public class LevelEditorScreen extends Updateable<Main>{
 
 	public LevelEditorScreen(Main m) {
 		super(m);

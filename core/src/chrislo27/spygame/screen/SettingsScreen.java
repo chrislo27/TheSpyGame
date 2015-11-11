@@ -7,12 +7,13 @@ import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.Main;
 import ionium.registry.ScreenRegistry;
+import ionium.screen.Updateable;
 import ionium.ui.BackButton;
 import ionium.ui.Button;
 import ionium.util.Utils;
 import ionium.util.i18n.Localization;
 
-public class SettingsScreen extends ScreenBase {
+public class SettingsScreen extends Updateable<Main> {
 
 	public SettingsScreen(Main m) {
 		super(m);
