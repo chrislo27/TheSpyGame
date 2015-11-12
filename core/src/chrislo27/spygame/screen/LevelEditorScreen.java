@@ -3,38 +3,40 @@ package chrislo27.spygame.screen;
 import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.Main;
+import chrislo27.spygame.leveleditor.LevelEditor;
 import chrislo27.spygame.world.World;
 import chrislo27.spygame.world.render.WorldRenderer;
 import ionium.screen.Updateable;
 
-public class LevelEditorScreen extends Updateable<Main>{
+public class LevelEditorScreen extends Updateable<Main> {
 
-	World world;
-	WorldRenderer renderer;
-	
+	LevelEditor levelEditor;
+
 	public LevelEditorScreen(Main m) {
 		super(m);
-		
-		renderer = new WorldRenderer(null, main);
+
+		levelEditor = new LevelEditor(main, null);
 	}
 
 	@Override
 	public void render(float delta) {
-		renderer.render();
+		levelEditor.render();
 	}
 
 	@Override
 	public void renderUpdate() {
-		renderer.renderUpdate();
+		levelEditor.inputUpdate();
+		levelEditor.renderUpdate();
 	}
 
 	@Override
 	public void tickUpdate() {
+		levelEditor.tickUpdate();
 	}
 
 	@Override
 	public Array<String> getDebugStrings(Array<String> array) {
-		return null;
+		return array;
 	}
 
 	@Override
