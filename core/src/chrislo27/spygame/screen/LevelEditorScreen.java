@@ -4,8 +4,7 @@ import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.Main;
 import chrislo27.spygame.leveleditor.LevelEditor;
-import chrislo27.spygame.world.World;
-import chrislo27.spygame.world.render.WorldRenderer;
+import chrislo27.spygame.tests.TestWorld;
 import ionium.screen.Updateable;
 
 public class LevelEditorScreen extends Updateable<Main> {
@@ -15,7 +14,7 @@ public class LevelEditorScreen extends Updateable<Main> {
 	public LevelEditorScreen(Main m) {
 		super(m);
 
-		levelEditor = new LevelEditor(main, null);
+		levelEditor = new LevelEditor(main, new TestWorld(100, 50));
 	}
 
 	@Override

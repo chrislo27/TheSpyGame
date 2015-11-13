@@ -51,13 +51,7 @@ public class WorldRenderer {
 
 		batch.flush();
 
-		for (int i = 0; i < world.entities.size; i++) {
-			Entity e = world.entities.get(i);
-
-			e.getRenderer().renderUpdate(this);
-
-			e.getRenderer().render(this);
-		}
+		renderAndRenderUpdateAllEntities();
 
 		batch.end();
 		batch.setProjectionMatrix(main.camera.combined);
@@ -69,7 +63,11 @@ public class WorldRenderer {
 			return;
 		}
 		
-		Entity player = world.currentFocusedEntity;
+		centerCameraOnEntity(world.currentFocusedEntity);
+	}
+	
+	protected void centerCameraOnEntity(Entity e){
+		Entity player = e;
 		if (player != null) {
 			cameraTarget.set(player.bounds.x + player.bounds.width / 2,
 					player.bounds.y + player.bounds.height / 2, 0);
@@ -84,6 +82,16 @@ public class WorldRenderer {
 				world.sizey - camera.viewportHeight / 2);
 
 		camera.update();
+	}
+	
+	protected void renderAndRenderUpdateAllEntities(){
+		for (int i = 0; i < world.entities.size; i++) {
+			Entity e = world.entities.get(i);
+
+			e.getRenderer().renderUpdate(this);
+
+			e.getRenderer().render(this);
+		}
 	}
 
 }
