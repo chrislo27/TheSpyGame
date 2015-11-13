@@ -2,6 +2,7 @@ package chrislo27.spygame.leveleditor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 import chrislo27.spygame.Main;
@@ -18,6 +19,7 @@ public class LevelEditor {
 	public LevelEditorRenderer renderer;
 
 	public Entity currentSelected;
+	public Rectangle selectionBox = new Rectangle(-1, -1, 0, 0);
 
 	private Vector3 screenCoords = new Vector3();
 
@@ -37,14 +39,30 @@ public class LevelEditor {
 	}
 
 	public void inputUpdate() {
-		if (Utils.isButtonJustPressed(Buttons.LEFT)) {
+		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
+			setScreenCoordsVector();
+			renderer.camera.unproject(screenCoords);
+
+			if (selectionBox.x < 0 || selectionBox.y < 0) {
+				selectionBox.x = screenCoords.x;
+				selectionBox.y = screenCoords.y;
+			}
+			
+			selectionBox.width = screenCoords.x - selectionBox.x;
+			selectionBox.height = screenCoords.y - selectionBox.y;
+		}else{
+			selectionBox.x = -1;
+			selectionBox.y = -1;
+		}
+		
+		if (Utils.isButtonJustReleased(Buttons.LEFT)) {
 			Entity e = null;
 			Entity newSelected = null;
 
 			for (int i = world.entities.size - 1; i >= 0; i--) {
 				setScreenCoordsVector();
 				renderer.camera.unproject(screenCoords);
-				
+
 				e = world.entities.get(i);
 
 				if (MathHelper.isPointInRectangle(e.bounds.x, e.bounds.y, e.bounds.width,
@@ -60,10 +78,9 @@ public class LevelEditor {
 					world.entities.removeValue(currentSelected, true);
 					world.entities.insert(world.entities.size, currentSelected);
 				}
-				
+
 				currentSelected = newSelected;
 			}
-
 		}
 	}
 

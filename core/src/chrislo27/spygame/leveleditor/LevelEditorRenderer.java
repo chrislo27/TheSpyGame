@@ -17,6 +17,27 @@ public class LevelEditorRenderer extends WorldRenderer {
 	}
 
 	@Override
+	public void render() {
+		super.render();
+
+		batch.setProjectionMatrix(camera.combined);
+		batch.begin();
+		if (editor.selectionBox.x >= 0 && editor.selectionBox.y >= 0) {
+			// alpha 0.2 - 0.25
+			batch.setColor(0, 1, 1, MathHelper.getTriangleWave(1f) * 0.05f + 0.2f);
+			Main.fillRect(batch, editor.selectionBox.x, editor.selectionBox.y,
+					editor.selectionBox.width, editor.selectionBox.height);
+			batch.setColor(0, 1, 1, 1f);
+			Main.drawRect(batch, editor.selectionBox.x, editor.selectionBox.y,
+					editor.selectionBox.width, editor.selectionBox.height, World.UNIT_PX * 4);
+			batch.setColor(1, 1, 1, 1);
+
+		}
+		batch.end();
+		batch.setProjectionMatrix(main.camera.combined);
+	}
+
+	@Override
 	public void renderUpdate() {
 		if (world == null) {
 			return;
@@ -40,14 +61,15 @@ public class LevelEditorRenderer extends WorldRenderer {
 			// normal render
 			editor.currentSelected.getRenderer().render(this);
 
-			// glowing triangle save
+			// glowing triangle wave glow between 0.25 - 0.75
 			batch.setColor(0, 1, 1, (MathHelper.getTriangleWave(1f) * 0.5f) + 0.25f);
 			editor.currentSelected.getRenderer().render(this);
 
 			// bounds outline
 			batch.setColor(0, 1, 1, 1);
 			Main.drawRect(batch, editor.currentSelected.bounds.x, editor.currentSelected.bounds.y,
-					editor.currentSelected.bounds.width, editor.currentSelected.bounds.height, World.UNIT_PX * 2);
+					editor.currentSelected.bounds.width, editor.currentSelected.bounds.height,
+					World.UNIT_PX * 2);
 			batch.setColor(1, 1, 1, 1);
 		}
 	}
