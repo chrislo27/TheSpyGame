@@ -12,7 +12,7 @@ public class GlobalVariableTweaks {
 				.putString("VERSION_URL",
 						"https://raw.githubusercontent.com/chrislo27/VersionPlace/master/TheSpyGame-version.txt");
 
-		DebugSetting.showFPS = true;
+		DebugSetting.showFPS = false;
 	}
 	
 }
