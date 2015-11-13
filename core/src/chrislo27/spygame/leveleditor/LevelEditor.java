@@ -43,6 +43,8 @@ public class LevelEditor {
 
 			for (int i = world.entities.size - 1; i >= 0; i--) {
 				setScreenCoordsVector();
+				renderer.camera.unproject(screenCoords);
+				
 				e = world.entities.get(i);
 
 				if (MathHelper.isPointInRectangle(e.bounds.x, e.bounds.y, e.bounds.width,
