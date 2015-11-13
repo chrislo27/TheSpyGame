@@ -46,29 +46,32 @@ public class LevelEditorRenderer extends WorldRenderer {
 
 	@Override
 	protected void renderAndRenderUpdateAllEntities() {
+		Entity e;
+
 		for (int i = 0; i < world.entities.size; i++) {
-			Entity e = world.entities.get(i);
+			e = world.entities.get(i);
 
 			e.lerpX = e.bounds.x;
 			e.lerpY = e.bounds.y;
 
-			if (e != editor.currentSelected) {
+			if (!editor.currentSelected.contains(e, true)) {
 				e.getRenderer().render(this);
 			}
 		}
 
-		if (editor.currentSelected != null) {
+		for (int i = 0; i < editor.currentSelected.size; i++) {
+			e = editor.currentSelected.get(i);
+
 			// normal render
-			editor.currentSelected.getRenderer().render(this);
+			e.getRenderer().render(this);
 
 			// glowing triangle wave glow between 0.25 - 0.75
 			batch.setColor(0, 1, 1, (MathHelper.getTriangleWave(1f) * 0.5f) + 0.25f);
-			editor.currentSelected.getRenderer().render(this);
+			e.getRenderer().render(this);
 
 			// bounds outline
 			batch.setColor(0, 1, 1, 1);
-			Main.drawRect(batch, editor.currentSelected.bounds.x, editor.currentSelected.bounds.y,
-					editor.currentSelected.bounds.width, editor.currentSelected.bounds.height,
+			Main.drawRect(batch, e.bounds.x, e.bounds.y, e.bounds.width, e.bounds.height,
 					World.UNIT_PX * 2);
 			batch.setColor(1, 1, 1, 1);
 		}

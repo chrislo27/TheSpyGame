@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Array;
 
 import chrislo27.spygame.Main;
 import chrislo27.spygame.entity.Entity;
@@ -18,7 +19,7 @@ public class LevelEditor {
 	public World world;
 	public LevelEditorRenderer renderer;
 
-	public Entity currentSelected;
+	public Array<Entity> currentSelected = new Array<>();
 	public Rectangle selectionBox = new Rectangle(-1, -1, 0, 0);
 
 	private Vector3 screenCoords = new Vector3();
@@ -47,40 +48,36 @@ public class LevelEditor {
 				selectionBox.x = screenCoords.x;
 				selectionBox.y = screenCoords.y;
 			}
-			
+
 			selectionBox.width = screenCoords.x - selectionBox.x;
 			selectionBox.height = screenCoords.y - selectionBox.y;
-		}else{
-			selectionBox.x = -1;
-			selectionBox.y = -1;
 		}
-		
+
 		if (Utils.isButtonJustReleased(Buttons.LEFT)) {
 			Entity e = null;
-			Entity newSelected = null;
+
+			for (int i = 0; i < currentSelected.size; i++) {
+				e = currentSelected.get(i);
+
+				world.entities.removeIndex(i);
+				world.entities.insert(world.entities.size, e);
+			}
+
+			currentSelected.clear();
 
 			for (int i = world.entities.size - 1; i >= 0; i--) {
-				setScreenCoordsVector();
-				renderer.camera.unproject(screenCoords);
-
 				e = world.entities.get(i);
 
-				if (MathHelper.isPointInRectangle(e.bounds.x, e.bounds.y, e.bounds.width,
-						e.bounds.height, screenCoords.x, screenCoords.y)) {
-					newSelected = e;
-
-					break;
+				if (MathHelper.intersects(e.bounds.x, e.bounds.y, e.bounds.width, e.bounds.height,
+						selectionBox.x, selectionBox.y, selectionBox.width, selectionBox.height)) {
+					currentSelected.add(e);
 				}
 			}
+		}
 
-			if (newSelected != currentSelected) {
-				if (currentSelected != null) {
-					world.entities.removeValue(currentSelected, true);
-					world.entities.insert(world.entities.size, currentSelected);
-				}
-
-				currentSelected = newSelected;
-			}
+		if (Gdx.input.isButtonPressed(Buttons.LEFT) == false) {
+			selectionBox.x = -1;
+			selectionBox.y = -1;
 		}
 	}
 
