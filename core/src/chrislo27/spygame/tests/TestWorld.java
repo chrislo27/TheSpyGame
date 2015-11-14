@@ -11,6 +11,7 @@ public class TestWorld extends World{
 		EntityPlayer player = new EntityPlayer(this, 4, 10);
 		
 		entities.add(player);
+		entities.add(new EntityPlayer(this, 4, 13));
 		
 		currentFocusedEntity = player;
 	}
